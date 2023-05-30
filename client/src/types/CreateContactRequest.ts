@@ -1,6 +1,6 @@
 export interface CreateContactRequest {
   name: string,
-  phoneNumber: Number
+  phoneNumber: string
   address: string,
   dueDate: string
 }
