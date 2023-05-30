@@ -69,7 +69,7 @@ functions:
           authorizer: Auth
           reqValidatorName: RequestBodyValidator
           request:
-            schema:
+            schemas:
               application/json: ${file(models/create-contact-model.json)}
     iamRoleStatements:
       - Effect: Allow
@@ -91,7 +91,7 @@ functions:
           authorizer: Auth
           reqValidatorName: RequestBodyValidator
           request:
-            schema:
+            schemas:
               application/json: ${file(models/update-contact-model.json)}
     iamRoleStatements:
       - Effect: Allow
