@@ -20,14 +20,14 @@
     "dueDate": {
       "type": "string"
     },
-    "done": {
+    "favorite": {
       "type": "boolean"
     }
   },
   "required": [
     "name",
     "dueDate",
-    "done"
+    "favorite"
   ],
   "additionalProperties": false
 }
