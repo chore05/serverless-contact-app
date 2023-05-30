@@ -9,25 +9,25 @@ enum UploadState {
   UploadingFile,
 }
 
-interface EditBlogProps {
+interface EditContactProps {
   match: {
     params: {
-      blogId: string
+      contactId: string
     }
   }
   auth: Auth
 }
 
-interface EditBlogState {
+interface EditContactState {
   file: any
   uploadState: UploadState
 }
 
-export class EditBlog extends React.PureComponent<
-  EditBlogProps,
-  EditBlogState
+export class EditContact extends React.PureComponent<
+  EditContactProps,
+  EditContactState
 > {
-  state: EditBlogState = {
+  state: EditContactState = {
     file: undefined,
     uploadState: UploadState.NoUpload
   }
@@ -51,7 +51,7 @@ export class EditBlog extends React.PureComponent<
       }
 
       this.setUploadState(UploadState.FetchingPresignedUrl)
-      const uploadUrl = await getUploadUrl(this.props.auth.getIdToken(), this.props.match.params.blogId)
+      const uploadUrl = await getUploadUrl(this.props.auth.getIdToken(), this.props.match.params.contactId)
 
       this.setUploadState(UploadState.UploadingFile)
       await uploadFile(uploadUrl, this.state.file)

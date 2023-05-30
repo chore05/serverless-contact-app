@@ -45,7 +45,12 @@ export class Contacts extends React.PureComponent<ContactsProps, ContactsState> 
   handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     this.setState({ newContactName: event.target.value })
   }
-  handleSummaryChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+
+  handlePhoneNumberChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    this.setState({ phone: Number(event.target.value )})
+  }
+
+  handleAddressChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     this.setState({ address: event.target.value })
   }
 
@@ -139,16 +144,23 @@ export class Contacts extends React.PureComponent<ContactsProps, ContactsState> 
         <Grid.Column width={16}>
           <Form onSubmit={ this.onContactCreate}>
               <Input
-                label='Contact Title'
+                label='Contact Name'
                 fluid
-                placeholder="Set the contact title"
+                placeholder="Set the contact name"
                 onChange={this.handleNameChange}
               />
-              <TextArea
-                label='Summary'
+              <Input
+                label='Phone Number'
+                type='number'
                 fluid
-                placeholder="Add summary of contact"
-                onChange={this.handleSummaryChange}
+                placeholder="Set the phone number"
+                onChange={this.handlePhoneNumberChange}
+              />
+              <TextArea
+                label='address'
+                fluid
+                placeholder="Add contacts home address"
+                onChange={this.handleAddressChange}
               />
               <Button 
                 type='submit'
