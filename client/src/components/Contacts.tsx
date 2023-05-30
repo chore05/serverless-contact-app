@@ -28,7 +28,7 @@ interface ContactsProps {
 interface ContactsState {
   contacts: Contact[]
   newContactName: string
-  phone: Number
+  phone: string
   address: string
   loadingContacts: boolean
 }
@@ -37,7 +37,7 @@ export class Contacts extends React.PureComponent<ContactsProps, ContactsState> 
   state: ContactsState = {
     contacts: [],
     newContactName: '',
-    phone:0,
+    phone:'',
     address: '',
     loadingContacts: true
   }
@@ -47,7 +47,7 @@ export class Contacts extends React.PureComponent<ContactsProps, ContactsState> 
   }
 
   handlePhoneNumberChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    this.setState({ phone: Number(event.target.value )})
+    this.setState({ phone: event.target.value })
   }
 
   handleAddressChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -74,7 +74,7 @@ export class Contacts extends React.PureComponent<ContactsProps, ContactsState> 
       this.setState({
         contacts: [...this.state.contacts, newContact],
         newContactName: '',
-        phone:0,
+        phone:'0',
         address: ''
       })
     } catch {
@@ -109,7 +109,7 @@ export class Contacts extends React.PureComponent<ContactsProps, ContactsState> 
         })
       })
     } catch {
-      alert('Contact deletion failed')
+      alert('Contact update failed')
     }
   }
 
@@ -151,7 +151,7 @@ export class Contacts extends React.PureComponent<ContactsProps, ContactsState> 
               />
               <Input
                 label='Phone Number'
-                type='number'
+                type="number"
                 fluid
                 placeholder="Set the phone number"
                 onChange={this.handlePhoneNumberChange}
