@@ -10,15 +10,28 @@
 			"item": [
 				{
 					"name": "Get all contacts",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
 						"method": "GET",
 						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
 							{
 								"key": "Authorization",
 								"value": "Bearer {{authToken}}",
 								"type": "text"
 							}
 						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
 						"url": {
 							"raw": "https://{{apiId}}.execute-api.us-east-1.amazonaws.com/dev/contacts",
 							"protocol": "https",
@@ -56,7 +69,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"name\": \"Water flowers\",\n    \"summary\": \"Water flowers are beautiful\",\n\t\"dueDate\": \"2019-06-11\"\n}"
+							"raw": "{\n\t\"name\": \"Peter Doe\",\n    \"phoneNumber\": \"0714544443\",\n    \"address\": \"0053 ST, Romania\",\n\t\"dueDate\": \"2019-06-12\"\n}"
 						},
 						"url": {
 							"raw": "https://{{apiId}}.execute-api.us-east-1.amazonaws.com/dev/contacts",
@@ -95,10 +108,10 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"name\": \"Change the world\",\n    \"summary\": \"The world has been changed to on with clean and renewable energy\",\n\t\"dueDate\": \"2019-12-11\",\n\t\"done\": true\n}"
+							"raw": "{\n\t\"name\": \"John Doe\",\n    \"phoneNumber\": \"23654789\",\n    \"address\": \"ST 093, Jomes Town\",\n\t\"dueDate\": \"2019-12-11\",\n\t\"favorite\": false\n}"
 						},
 						"url": {
-							"raw": "https://{{apiId}}.execute-api.us-east-1.amazonaws.com/dev/contacts/3679961d-9cde-4a99-be61-3f23d87c86f9",
+							"raw": "https://{{apiId}}.execute-api.us-east-1.amazonaws.com/dev/contacts/27c0d49a-08af-4b13-9fe8-d217d688fd3c",
 							"protocol": "https",
 							"host": [
 								"{{apiId}}",
@@ -110,7 +123,7 @@
 							"path": [
 								"dev",
 								"contacts",
-								"3679961d-9cde-4a99-be61-3f23d87c86f9"
+								"27c0d49a-08af-4b13-9fe8-d217d688fd3c"
 							]
 						}
 					},
@@ -138,7 +151,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "https://{{apiId}}.execute-api.us-east-1.amazonaws.com/dev/contacts/e303800d-a584-41cd-b077-834aee57c7ce",
+							"raw": "https://{{apiId}}.execute-api.us-east-1.amazonaws.com/dev/contacts/7b1eec07-4526-4698-bf8c-9063a14bf3c9",
 							"protocol": "https",
 							"host": [
 								"{{apiId}}",
@@ -150,7 +163,7 @@
 							"path": [
 								"dev",
 								"contacts",
-								"e303800d-a584-41cd-b077-834aee57c7ce"
+								"7b1eec07-4526-4698-bf8c-9063a14bf3c9"
 							]
 						}
 					},
@@ -172,7 +185,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "https://{{apiId}}.execute-api.us-east-1.amazonaws.com/dev/contacts/3679961d-9cde-4a99-be61-3f23d87c86f9/attachment",
+							"raw": "https://{{apiId}}.execute-api.us-east-1.amazonaws.com/dev/contacts/27c0d49a-08af-4b13-9fe8-d217d688fd3c/attachment",
 							"protocol": "https",
 							"host": [
 								"{{apiId}}",
@@ -184,7 +197,7 @@
 							"path": [
 								"dev",
 								"contacts",
-								"3679961d-9cde-4a99-be61-3f23d87c86f9",
+								"27c0d49a-08af-4b13-9fe8-d217d688fd3c",
 								"attachment"
 							]
 						}
@@ -237,12 +250,12 @@
 	"variable": [
 		{
 			"key": "apiId",
-			"value": "j11tpumvi3",
+			"value": "0rpkd4orgk",
 			"type": "string"
 		},
 		{
 			"key": "authToken",
-			"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6ImU1Xzg2a1FBeEVCQzc0WnVZRTNOSSJ9.eyJpc3MiOiJodHRwczovL2Rldi1tMDVoZDR3NDh3MzdsMGF5LnVzLmF1dGgwLmNvbS8iLCJhdWQiOiJvMENjNG55cGJFTG9hc2FRMXg4b2pWZGFpWlpGWnFwZSIsImlhdCI6MTY4NDc0NzIzNiwiZXhwIjoxNjg1Mzg3MjM2LCJzdWIiOiJhdXRoMHw2NDZiMzNkZmRhNDhkZmRkYjEzMmY3ZjkiLCJhdF9oYXNoIjoiVkgzQ2U3UzdHMjhTSGo1ZVNEelNXZyIsInNpZCI6ImxfRFFtdk5MbmZodk5yLWJHREcxNXFKbWFRckc1TW5GIiwibm9uY2UiOiJ1cncyR2lEQlYycm5SQlI4NWhSYXFGZ012QzRlZHM4fiJ9.gPkv5E6y3E7wH-Q9dIfm7JUmLOKvWknuwTx1slPMoqZHsAzYZyjyyisRlN2pnC-KpuTHln6HnjmOaMCmUcOl93lnghxksoGBkyjxIwlbHp_fkvITdQ2DSSWTkJVsesgh_mxIqPWNrzxvQh7hSHf9p0_S5ClhSDTxrQarsCtcfafi4I_PPLgdCeLVWyAhoO4tL5v8faM1UiuRWoNh8nmsU05YRmI0tzElUWmAU-ezEyXuc2cZwDURgblMX1ZZxAq1Mmb9JPoEsntbLV2aw5g_Rlp-lJh17nF9mMMUW-IU_L1jH3xuGX-mtmN5BN62pJezslagF_1LMciA805A73uaVg",
+			"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Ik4wSkNPSFBvdmdyNEJzUmhheVhiWiJ9.eyJpc3MiOiJodHRwczovL2Rldi1hc25teDMyaGh2M2Y4Zm9lLnVzLmF1dGgwLmNvbS8iLCJhdWQiOiJxajdvTzBQTW92SXhnbUFOMHNHa3owVFQ4MG53QklaZSIsImlhdCI6MTY4NTQ0MzI1MSwiZXhwIjoxNjg2MDgzMjUxLCJzdWIiOiJhdXRoMHw2NDc0ZjVlNTE1YjUzNmZmY2UxMDQ3YjEiLCJhdF9oYXNoIjoiZ3BaaC1GRmRLLThXN3dUczljQlVjQSIsInNpZCI6IlA1NXRMQVYxa1VOUG1mSkplREowUTB5eXZ6SW16Nnh4Iiwibm9uY2UiOiJJeUV-eEh5R29JejZ5QXpyZmtuU3U1dmJ0NTBLLmx3RyJ9.RDjc6RLeNTlCQB1xM6X2V9blBda8y6WdVE6p8RfUVV98B29TELKzOFU1x2uAkEV36_4bnLKzZX1DY1GdpoUREbM7KNHmXCT0_PceYbh9JHA6bw27ndCC5xHpSB4u65C1nfJLBqT2HkNZycYLruXxZ61-mznSmylxaRbOkbj88XQSdRt-K0S1ppG1nSV4E0FzueSaYdO_VV9MjS-T3Yh_ILb35HusOtKVeaPfKu8FEWjWWaTmV5S0N3hVH5s38Z8EJ2bi_imigHDTrAfXLfUxvfBh5-OwqZZXGs0diSESJzwv2shRZWLuAojMpLHdSuqQe0TZXlQmdhLqN-6OU9YUfA",
 			"type": "string"
 		}
 	]
