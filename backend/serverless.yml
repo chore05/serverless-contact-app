@@ -11,8 +11,6 @@ plugins:
 
 provider:
   name: aws
-  runtime: nodejs12.x
-  lambdaHashingVersion: '20201221'
 
   stage: ${opt:stage, 'dev'}
   region: ${opt:region, 'us-east-1'}
@@ -24,8 +22,8 @@ provider:
   # Use these variables in the functions and resouorces section below. For example, 
   # ${self:provider.environment.ATTACHMENT_S3_BUCKET}
   environment:
-    BLOGS_TABLE: Contacts-${self:provider.stage}
-    BLOGS_CREATED_AT_INDEX: CreatedAtIndex
+    CONTACTS_TABLE: Contacts-${self:provider.stage}
+    CONTACTS_CREATED_AT_INDEX: CreatedAtIndex
     ATTACHMENT_S3_BUCKET: serverless-contact-app-images-${self:provider.stage}
     SIGNED_URL_EXPIRATION: 300
 
@@ -55,7 +53,7 @@ functions:
           - xray:PutTraceSegments
           - dynamodb:Query
           - dynamodb:GetItem
-        Resource: arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.BLOGS_TABLE}/index/${self:provider.environment.BLOGS_CREATED_AT_INDEX}
+        Resource: arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.CONTACTS_TABLE}/index/${self:provider.environment.CONTACTS_CREATED_AT_INDEX}
 
   # TODO: Configure this function - 
   # Provide iamRoleStatements property. Decide the Actions and AWS Resource. 
@@ -79,7 +77,7 @@ functions:
           - dynamodb:PutItem
           - xray:PutTelemetryRecords
           - xray:PutTraceSegments
-        Resource: arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.BLOGS_TABLE}
+        Resource: arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.CONTACTS_TABLE}
 
   # TODO: Configure this function
   # Provide property for setting up CORS, Authorizer, iamRoleStatements, and request schemas
@@ -101,7 +99,7 @@ functions:
           - dynamodb:UpdateItem
           - xray:PutTelemetryRecords
           - xray:PutTraceSegments
-        Resource: arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.BLOGS_TABLE}
+        Resource: arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.CONTACTS_TABLE}
 
   # TODO: Configure this function
   # Provide property for setting up CORS, Authorizer, iamRoleStatements
@@ -119,7 +117,7 @@ functions:
           - dynamodb:DeleteItem
           - xray:PutTelemetryRecords
           - xray:PutTraceSegments
-        Resource: arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.BLOGS_TABLE}
+        Resource: arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.CONTACTS_TABLE}
 
   # TODO: Configure this function
   # Provide property for setting up CORS, Authorizer, iamRoleStatements
@@ -179,9 +177,9 @@ resources:
           - AttributeName: contactId
             KeyType: RANGE
         BillingMode: PAY_PER_REQUEST
-        TableName: ${self:provider.environment.BLOGS_TABLE}
+        TableName: ${self:provider.environment.CONTACTS_TABLE}
         GlobalSecondaryIndexes:
-          - IndexName: ${self:provider.environment.BLOGS_CREATED_AT_INDEX}
+          - IndexName: ${self:provider.environment.CONTACTS_CREATED_AT_INDEX}
             KeySchema:
               - AttributeName: userId
                 KeyType: HASH
@@ -195,9 +193,6 @@ resources:
       Type: AWS::S3::Bucket
       Properties:
         BucketName: ${self:provider.environment.ATTACHMENT_S3_BUCKET}
-        OwnershipControls:
-          Rules:
-            -  ObjectOwnership: ObjectWrite
         PublicAccessBlockConfiguration:
           BlockPublicAcls: false
           BlockPublicPolicy: false
@@ -223,7 +218,8 @@ resources:
     BucketPolicy:
       Type: AWS::S3::BucketPolicy
       Properties:
-        Bucket: !Ref AttachmentsBucket
+        Bucket: 
+          Ref: AttachmentsBucket
         PolicyDocument:
           Id: MyS3Policy
           Version: "2012-10-17"
