@@ -297,3 +297,12 @@ Select a file to import:
 Provide the variables for the collection:
 
 ![Alt text](images/collection-4.png?raw=true "Image 4")
+
+## Note
+- I am using node version 18 for this project so if you come across any issues starting the frontend or backend, set the enviroment variable before running `npm run start` for frontend or `serverless deploy` for backend
+```windows
+SET NODE_OPTIONS=--openssl-legacy-provider
+```
+
+- The Phone number field must contain at most 8 digits
+- the address field and name field must be filled before creating a new contact
