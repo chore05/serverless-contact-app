@@ -1,5 +1,5 @@
 import * as AWS from 'aws-sdk'
-import * as AWSXRay from 'aws-xray-sdk'
+const AWSXRay = require('aws-xray-sdk') 
 import { DocumentClient } from 'aws-sdk/clients/dynamodb'
 import { createLogger } from '../utils/logger'
 import { ContactUpdate } from '../models/ContactUpdate';
@@ -47,7 +47,7 @@ export class ContactsAccess {
             TableName: this.contactTable,
             Key: {
                 'userId': uId, 
-                'contaccontactId': contactId
+                'contactId': contactId
             },
             ExpressionAttributeNames: {
                 '#NAMES': 'name',
@@ -77,7 +77,7 @@ export class ContactsAccess {
     async deleteContact(uId:string, contactId:string) {
         await this.docClient.delete({
             TableName: this.contactTable,
-            Key: {'userId': uId, 'contaccontactId': contactId}
+            Key: {'userId': uId, 'contactId': contactId}
         }).promise()
     }
 }
